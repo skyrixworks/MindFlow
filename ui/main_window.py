@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
 
 
     def new_file(self):
-        pass
+        self.editor.clear()
 
 
     def open_file(self):
