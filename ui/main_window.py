@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow, QTextEdit, QFileDialog
+from PySide6.QtWidgets import QMainWindow, QTextEdit, QFileDialog, QMessageBox
 from PySide6.QtGui import QAction
 
 class MainWindow(QMainWindow):
@@ -22,6 +22,16 @@ class MainWindow(QMainWindow):
 
 
     def new_file(self):
+        if not self.editor.document().isEmpty():
+            reply = QMessageBox.question(
+                self, 
+                'Save file', 
+                'Do you want to save the file?', 
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.Yes
+            )
+            if reply == QMessageBox.Yes:
+                self.save_file()
         self.editor.clear()
 
 
