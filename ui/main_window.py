@@ -45,6 +45,8 @@ class MainWindow(QMainWindow):
                 file_content = text_stream.readAll()
                 self.editor.setPlainText(file_content)
                 file.close()
+            else:
+                QMessageBox.warning(self, 'Error', 'Failed to open file. Check permissions or try another file.')
 
 
     def save_file(self):
