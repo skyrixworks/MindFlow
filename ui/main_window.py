@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QMainWindow, QTextEdit, QFileDialog, QMessageBox
 from PySide6.QtGui import QAction
+from PySide6.QtCore import QTextStream, QFile
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -36,7 +37,13 @@ class MainWindow(QMainWindow):
 
 
     def open_file(self):
-        pass
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Open file', '', 'Text files (*.txt);;All files (*)')
+        if file_path:
+            file = QFile(file_path)
+            if file.open(QFile.ReadOnly | QFile.Text):
+                text_stream = QTextStream(file)
+                file_content = text_stream.readAll()
+                self.editor.setPlainText(file_content)
 
 
     def save_file(self):
