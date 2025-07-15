@@ -44,6 +44,7 @@ class MainWindow(QMainWindow):
                 text_stream = QTextStream(file)
                 file_content = text_stream.readAll()
                 self.editor.setPlainText(file_content)
+                file.close()
 
 
     def save_file(self):
