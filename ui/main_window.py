@@ -5,7 +5,7 @@ from PySide6.QtCore import QTextStream, QFile
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('MindFlow')
+        self.setWindowTitle('MindNote')
         self.setMinimumSize(800, 600)
         self.editor = QTextEdit()
         self.setCentralWidget(self.editor)
@@ -20,6 +20,16 @@ class MainWindow(QMainWindow):
         save_action = QAction('Save', self)
         save_action.triggered.connect(self.save_file)
         file_menu.addAction(save_action)
+        self.status = self.statusBar()
+        self.update_editor_info()
+        self.editor.textChanged.connect(self.update_editor_info)
+
+
+    def update_editor_info(self):
+        text = self.editor.toPlainText()
+        chars = len(text)
+        words = len(text.split())
+        self.status.showMessage(f'Characters: {chars}, Words: {words}')    
 
 
     def new_file(self):
