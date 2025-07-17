@@ -29,7 +29,8 @@ class MainWindow(QMainWindow):
         text = self.editor.toPlainText()
         chars = len(text)
         words = len(text.split())
-        self.status.showMessage(f'Characters: {chars}, Words: {words}')    
+        lines = text.count('\n')
+        self.status.showMessage(f'Characters: {chars}, Words: {words}, Lines: {lines}')    
 
 
     def new_file(self):
